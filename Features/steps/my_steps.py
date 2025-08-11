@@ -30,25 +30,6 @@ def step_impl(context):
             print("⚠ Username field exists but is not visible.")
     except NoSuchElementException:
         print("❌ Username field not found.")
-'''
-@when(u'Enter UserName "{username}" And EnterPassword "{password}"')
-def step_impl(context, username, password):
-    username_field = context.driver.find_element(By.NAME, "username")
-    username_field.clear()
-    username_field.send_keys(username)
-
-    password_field = context.driver.find_element(By.NAME, "password")
-    password_field.clear()
-    password_field.send_keys(password)
-    '''
-
-'''
-@when("Click on login button")
-def step_impl(context):
-    login_button = context.driver.find_element(By.XPATH, "//*[@type='submit']")
-    login_button.click()
-    '''
-
 
 @then("close browser")
 def step_impl(context):
