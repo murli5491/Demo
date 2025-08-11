@@ -5,6 +5,10 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Chrome
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 @given("launch the browser")
 def step_impl(context):
@@ -26,6 +30,7 @@ def step_impl(context):
             print("⚠ Username field exists but is not visible.")
     except NoSuchElementException:
         print("❌ Username field not found.")
+'''
 @when(u'Enter UserName "{username}" And EnterPassword "{password}"')
 def step_impl(context, username, password):
     username_field = context.driver.find_element(By.NAME, "username")
@@ -35,14 +40,61 @@ def step_impl(context, username, password):
     password_field = context.driver.find_element(By.NAME, "password")
     password_field.clear()
     password_field.send_keys(password)
+    '''
 
+'''
 @when("Click on login button")
 def step_impl(context):
     login_button = context.driver.find_element(By.XPATH, "//*[@type='submit']")
     login_button.click()
+    '''
 
 
 @then("close browser")
 def step_impl(context):
     context.driver.quit()
+
+@when(u'Enter UserName "{username}" And EnterPassword "{password}"')
+def step_impl(context, username, password):
+    wait = WebDriverWait(context.driver, 10)
+
+    # Wait for username field
+    username_field = wait.until(
+        EC.presence_of_element_located((By.NAME, "username"))
+    )
+    username_field.clear()
+    username_field.send_keys(username)
+
+    # Wait for password field
+    password_field = wait.until(
+        EC.presence_of_element_located((By.NAME, "password"))
+    )
+    password_field.clear()
+    password_field.send_keys(password)
+
+@when(u'click on login button')
+def step_impl(context):
+    wait = WebDriverWait(context.driver, 10)
+    # Wait for username field
+    username_field = wait.until(
+        EC.presence_of_element_located((By.XPATH, "//*[@type='submit']"))
+    )
+    username_field.click()
+
+@then(u'user must successfully login to the dashboard page')
+def step_impl(context):
+    wait = WebDriverWait(context.driver, 10)
+    # Wait for username field
+    username_field = wait.until(
+        EC.presence_of_element_located((By.XPATH, "//*[@class='oxd-brand-banner']"))
+    )
+    username_field.is_displayed()
+
+
+
+
+
+
+
+
 
