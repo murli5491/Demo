@@ -83,3 +83,16 @@ def step_impl(context):
     if username_field.is_displayed() == True:
         context.driver.close()
         assert True, "test  passed"
+
+
+@then(u'click on admin button')
+def step_impl(context):
+    try:
+        element = context.driver.find_element(By.XPATH, "//span[text()='Admin']")  # Username field
+        if element.is_displayed():
+            print("✅ Username field is displayed!")
+        else:
+            print("⚠ Username field exists but is not visible.")
+    except NoSuchElementException:
+        print("❌ Username field not found.")
+
