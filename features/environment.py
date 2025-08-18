@@ -9,6 +9,9 @@ def before_all(context):
     context.driver = webdriver.Chrome(service=service)
     context.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
     context.driver.maximize_window()
+
+
+
 #
 # def after_all(context):
 #     print("after_all")
